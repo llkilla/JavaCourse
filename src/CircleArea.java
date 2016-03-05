@@ -4,7 +4,7 @@ public class CircleArea {
 		double R = Double.parseDouble(args[0]);
 		System.out.println("Circle area= " + CalcCircleArea(R));
 	}
-	// Функция для расчета площади круга
+	// РџСЂРѕС†РµРґСѓСЂР° РІС‹С‡РёСЃР»РµРЅРёСЏ РїР»РѕС‰Р°РґРё РєСЂСѓРіР°
 	public static double CalcCircleArea(double R){
 		double Pi = 3.14;
 		return Pi * R * R;
