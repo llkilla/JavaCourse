@@ -33,7 +33,7 @@ public class SquareRoot {
 			i = i + 2;
 			cnt ++;
 			flag = ((res < i)||(res == 0));
-			System.out.println("res "+res+ " i "+i+" cnt "+cnt+" flag "+flag);
+			//System.out.println("res "+res+ " i "+i+" cnt "+cnt+" flag "+flag);
 		};
 		return cnt;
 	}
