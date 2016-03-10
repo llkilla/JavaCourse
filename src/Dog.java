@@ -1,25 +1,25 @@
 
-public class Dog extends Pet{
+public final class Dog extends Pet{
 	boolean isHunter;
 	double weight;
 	
-	public boolean isHunter() {
+	public final boolean isHunter() {
 		return isHunter;
 	}
 
-	public void setHunter(boolean isHunter) {
+	public final void setHunter(boolean isHunter) {
 		this.isHunter = isHunter;
 	}
 
-	public double getWeight() {
+	public final double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(double weight) {
+	public final void setWeight(double weight) {
 		this.weight = weight;
 	}
 	@Override
-	public void Voice(){
+	public final void Voice(){
 		System.out.println("Dog says \"Woof\"");
 	};
 }
