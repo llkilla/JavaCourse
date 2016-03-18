@@ -1,0 +1,87 @@
+package PPC;
+
+public abstract class Vehicle implements Payment{
+	private double speed;
+	private double carrying;
+	private double height;
+	private SpecialAutos spec; 
+	
+	public SpecialAutos getSpec() {
+		return spec;
+	}
+
+	public void setSpec(SpecialAutos spec) {
+		this.spec = spec;
+	}
+
+	private Vehicle(){};
+	
+	public Vehicle(double speed, double height, double carrying){
+		this.speed = speed;
+		this.height = height;
+		this.carrying = carrying;
+	}
+	
+	public double getCarrying() {
+		return carrying;
+	}
+	public void setCarrying(double carrying) {
+		this.carrying = carrying;
+	}
+	public double getHeight() {
+		return height;
+	}
+	public void setHeight(double height) {
+		this.height = height;
+	}
+	public double getSpeed() {
+		return speed;
+	}
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+	@Override
+	public String toString(){
+		return this.getClass()+"; speed: "+this.speed+"; carrying: "+this.carrying+"; height: "+this.height;
+	}
+	public void calculateBill() throws CheckYourAuto{
+		double cost = 0;
+		double fine = 0;
+		
+		double pCost = 1000.0;
+		double tCost = 2000.0;
+		
+		double trailerFine = 500.0;
+		double carryingFine = 800.0;
+		double speedFine = 1500.0;
+		
+		double maxCarrying = 10.0;
+		double maxSpeed = 180.0;
+		double maxHeight = 4.0;
+		double fineSpeed = 80.0;
+		
+		if (this.getSpeed() > maxSpeed){
+			throw new CheckYourAuto(new IllegalArgumentException("Превышена максимальная скорость! Вызов патруля ГИБДД!"));
+		}
+		if (this.getSpeed() > fineSpeed){
+			fine = fine + speedFine;
+		}
+		
+		if (this instanceof PassengerCar){
+			cost = cost + pCost;
+		}
+		else if (this instanceof Truck){
+			if (this.getHeight() > maxHeight){
+				throw new CheckYourAuto(new IllegalArgumentException("Превышена максимальная высота автомобиля! Проезд запрещен."));
+			}
+			if (this.getCarrying() > maxCarrying){
+				fine = fine + carryingFine;
+			}
+			cost = cost + tCost;
+			if (((Truck)this).isWithTrailer()){
+				fine = fine + trailerFine;
+			}
+		}
+		System.out.println(this.toString() + "; cost: "+cost+"; fine: "+fine+"; full: "+(cost+fine));
+	};
+}
