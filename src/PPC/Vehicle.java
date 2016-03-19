@@ -4,19 +4,42 @@ public abstract class Vehicle implements Payment{
 	private double speed;
 	private double carrying;
 	private double height;
-	private SpecialAutos spec; 
+	private specCat spec = specCat.ORDINARY;
 	
-	public SpecialAutos getSpec() {
-		return spec;
+	public enum specCat {AMBULANCE, FIRE, POLICE, ORDINARY};
+	
+	public boolean isOfSpecCat(){
+		if ((this.spec == null)||(this.spec == specCat.ORDINARY)){
+			return false;
+		} else {
+			try{
+				specCat sp = specCat.valueOf(this.spec.name());
+				return true;
+			}
+			catch(IllegalArgumentException e){
+				return false;
+			}
+			
+		}
 	}
 
-	public void setSpec(SpecialAutos spec) {
+	public specCat getSpec() {
+		return spec;
+	}
+	public void setSpec(specCat spec) {
 		this.spec = spec;
 	}
 
 	private Vehicle(){};
 	
 	public Vehicle(double speed, double height, double carrying){
+		this.speed = speed;
+		this.height = height;
+		this.carrying = carrying;
+	}
+	
+	public Vehicle(specCat spec, double speed, double height, double carrying){
+		this.spec = spec; 
 		this.speed = speed;
 		this.height = height;
 		this.carrying = carrying;
@@ -42,7 +65,7 @@ public abstract class Vehicle implements Payment{
 	}
 	@Override
 	public String toString(){
-		return this.getClass()+"; speed: "+this.speed+"; carrying: "+this.carrying+"; height: "+this.height;
+		return this.getClass()+"; speed: "+this.speed+"; carrying: "+this.carrying+"; height: "+this.height+"; ";
 	}
 	public void calculateBill() throws CheckYourAuto{
 		double cost = 0;
@@ -60,7 +83,13 @@ public abstract class Vehicle implements Payment{
 		double maxHeight = 4.0;
 		double fineSpeed = 80.0;
 		
+		if (this.isOfSpecCat()){
+			System.out.println(this.toString() + "Автомобиль специального назначения: проезд свободный!");
+			return;
+		} 
+		
 		if (this.getSpeed() > maxSpeed){
+			System.out.print(this.toString());
 			throw new CheckYourAuto(new IllegalArgumentException("Превышена максимальная скорость! Вызов патруля ГИБДД!"));
 		}
 		if (this.getSpeed() > fineSpeed){
@@ -72,6 +101,7 @@ public abstract class Vehicle implements Payment{
 		}
 		else if (this instanceof Truck){
 			if (this.getHeight() > maxHeight){
+				System.out.print(this.toString());
 				throw new CheckYourAuto(new IllegalArgumentException("Превышена максимальная высота автомобиля! Проезд запрещен."));
 			}
 			if (this.getCarrying() > maxCarrying){
@@ -82,6 +112,6 @@ public abstract class Vehicle implements Payment{
 				fine = fine + trailerFine;
 			}
 		}
-		System.out.println(this.toString() + "; cost: "+cost+"; fine: "+fine+"; full: "+(cost+fine));
+		System.out.println(this.toString() + "cost: "+cost+"; fine: "+fine+"; full: "+(cost+fine));
 	};
 }

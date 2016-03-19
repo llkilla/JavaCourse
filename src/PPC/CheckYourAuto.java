@@ -12,6 +12,6 @@ public class CheckYourAuto extends Exception{
 	}
 	@Override
 	public String toString(){
-		return "Произошло программное исключение " + th;
+		return th.getMessage();
 	}
 }

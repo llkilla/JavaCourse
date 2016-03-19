@@ -1,5 +1,7 @@
 package PPC;
 
+import PPC.Vehicle.specCat;
+
 public class WorkRegime {
 
 	public static void main(String[] args) {
@@ -62,7 +64,15 @@ public class WorkRegime {
 		catch(CheckYourAuto e){
 			System.out.println(e.toString());
 		};
+		Vehicle auto8 = new Truck(lowSpeed, highHeight, lowCarrying, false);
+		auto8.setSpec(specCat.FIRE);
 		
+		try{
+			auto8.calculateBill();
+		}
+		catch(CheckYourAuto e){
+			System.out.println(e.toString());
+		};
 	}
 
 }
