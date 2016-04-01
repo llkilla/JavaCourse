@@ -22,6 +22,7 @@ public class JavaReflectionTest {
 		Field f;
 
 		System.out.println("1. Получение ссылки на класс:");
+		System.out.println("-----------------------------------------------------");
 
 		classMatrix = Matrix.class;
 		System.out.println("- с использованием статического поля: " + classMatrix);
@@ -43,8 +44,9 @@ public class JavaReflectionTest {
 			e.printStackTrace();
 		}
 		System.out.println("- через ClassLoader: " + classMatrix);
-
+		System.out.println();
 		System.out.println("2. Создание экземпляров класса:");
+		System.out.println("-----------------------------------------------------");
 
 		constructors = classMatrix.getDeclaredConstructors();
 
@@ -58,6 +60,7 @@ public class JavaReflectionTest {
 
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException e) {
+			System.out.println("При создании экземпляра матрицы с помощью перегруженного конструктора произошла ошибка:");
 			e.printStackTrace();
 		}
 		parameterTypes = new Class[] {};
@@ -87,6 +90,7 @@ public class JavaReflectionTest {
 			methodPrint.setAccessible(false);
 			
 			System.out.println("Получили метод печати матриц с помощью рефлексии и сделали его скрытым");
+			System.out.println();
 			System.out.println("Заполнили созданные матрицы, печатаем:");
 			
 			methodPrint.invoke(b);
@@ -100,6 +104,7 @@ public class JavaReflectionTest {
 			res = (Matrix) methodAdd.invoke(b, c);
 
 			System.out.println("Получили метод сложения матриц с помощью рефлексии, результат сложения: ");
+			System.out.println();
 
 			methodPrint.invoke(res);
 			methodSubtract = classMatrix.getMethod("subtractMatrix", parameterTypes);
@@ -107,21 +112,25 @@ public class JavaReflectionTest {
 			res = (Matrix) methodSubtract.invoke(b, c);
 
 			System.out.println("Получили метод вычитания матриц с помощью рефлексии, результат вычитания: ");
+			System.out.println();
 
 			methodPrint.invoke(res);
 
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException | NoSuchFieldException e) {
+			System.out.println("Во время работы программы произошла ошибка:");
 			e.printStackTrace();
 		}
+		System.out.println("-----------------------------------------------------");
 		System.out.println("3. Получение всех полей и методов класса:");
+		System.out.println("-----------------------------------------------------");
 		System.out.println("Поля класса: ");
 		System.out.println("-----------------------------------------------------");
 
 		for (Field field : classMatrix.getDeclaredFields()) {
 			System.out.println(field.getType().getName() + " " + field.getName());
 		}
-
+		System.out.println("-----------------------------------------------------");
 		System.out.println("Методы класса: ");
 		System.out.println("-----------------------------------------------------");
 
