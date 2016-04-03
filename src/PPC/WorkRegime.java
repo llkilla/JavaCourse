@@ -20,19 +20,19 @@ public class WorkRegime {
 		try{
 			auto1.calculateBill();
 		}
-		catch(CheckYourAuto e){
+		catch(CheckYourAutoException e){
 			System.out.println(e.toString());
 		};
 		try{
 			auto2.calculateBill();
 		}
-		catch(CheckYourAuto e){
+		catch(CheckYourAutoException e){
 			System.out.println(e.toString());
 		};
 		try{
 			auto3.calculateBill();
 		}
-		catch(CheckYourAuto e){
+		catch(CheckYourAutoException e){
 			System.out.println(e.toString());
 		};
 		Vehicle auto4 = new Truck(lowSpeed, lowHeight, lowCarrying, false);
@@ -43,25 +43,25 @@ public class WorkRegime {
 		try{
 			auto4.calculateBill();
 		}
-		catch(CheckYourAuto e){
+		catch(CheckYourAutoException e){
 			System.out.println(e.toString());
 		};
 		try{
 			auto5.calculateBill();
 		}
-		catch(CheckYourAuto e){
+		catch(CheckYourAutoException e){
 			System.out.println(e.toString());
 		};
 		try{
 			auto6.calculateBill();
 		}
-		catch(CheckYourAuto e){
+		catch(CheckYourAutoException e){
 			System.out.println(e.toString());
 		};
 		try{
 			auto7.calculateBill();
 		}
-		catch(CheckYourAuto e){
+		catch(CheckYourAutoException e){
 			System.out.println(e.toString());
 		};
 		Vehicle auto8 = new Truck(lowSpeed, highHeight, lowCarrying, false);
@@ -70,7 +70,7 @@ public class WorkRegime {
 		try{
 			auto8.calculateBill();
 		}
-		catch(CheckYourAuto e){
+		catch(CheckYourAutoException e){
 			System.out.println(e.toString());
 		};
 	}

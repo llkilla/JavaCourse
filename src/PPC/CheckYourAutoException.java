@@ -1,9 +1,9 @@
 package PPC;
 
-public class CheckYourAuto extends Exception{
+public class CheckYourAutoException extends Exception{
 	private Throwable th;
 
-	public CheckYourAuto(Throwable th) {
+	public CheckYourAutoException(Throwable th) {
 		this.th = th;
 	}
 	

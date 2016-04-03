@@ -1,6 +1,7 @@
 package PPC;
 
 public abstract class Vehicle implements Payment{
+	private String name;
 	private double speed;
 	private double carrying;
 	private double height;
@@ -32,13 +33,15 @@ public abstract class Vehicle implements Payment{
 
 	private Vehicle(){};
 	
-	public Vehicle(double speed, double height, double carrying){
+	public Vehicle(String name, double speed, double height, double carrying){
+		this.name = name.equals(null) ? this.toString() : name;
 		this.speed = speed;
 		this.height = height;
 		this.carrying = carrying;
 	}
 	
-	public Vehicle(specCat spec, double speed, double height, double carrying){
+	public Vehicle(String name, specCat spec, double speed, double height, double carrying){
+		this.name = name.equals(null) ? this.toString() : name;
 		this.spec = spec; 
 		this.speed = speed;
 		this.height = height;
@@ -65,9 +68,9 @@ public abstract class Vehicle implements Payment{
 	}
 	@Override
 	public String toString(){
-		return this.getClass()+"; speed: "+this.speed+"; carrying: "+this.carrying+"; height: "+this.height+"; ";
+		return this.getName() + "; " + this.getClass()+"; speed: "+this.speed+"; carrying: "+this.carrying+"; height: "+this.height+"; ";
 	}
-	public void calculateBill() throws CheckYourAuto{
+	public void calculateBill() throws CheckYourAutoException{
 		double cost = 0;
 		double fine = 0;
 		
@@ -89,8 +92,8 @@ public abstract class Vehicle implements Payment{
 		} 
 		
 		if (this.getSpeed() > maxSpeed){
-			System.out.print(this.toString());
-			throw new CheckYourAuto(new IllegalArgumentException("Превышена максимальная скорость! Вызов патруля ГИБДД!"));
+			//System.out.print(this.toString());
+			throw new CheckYourAutoException(new IllegalArgumentException(this.toString() +"Превышена максимальная скорость! Вызов патруля ГИБДД!"));
 		}
 		if (this.getSpeed() > fineSpeed){
 			fine = fine + speedFine;
@@ -102,7 +105,7 @@ public abstract class Vehicle implements Payment{
 		else if (this instanceof Truck){
 			if (this.getHeight() > maxHeight){
 				System.out.print(this.toString());
-				throw new CheckYourAuto(new IllegalArgumentException("Превышена максимальная высота автомобиля! Проезд запрещен."));
+				throw new CheckYourAutoException(new IllegalArgumentException(this.toString() +"Превышена максимальная высота автомобиля! Проезд запрещен."));
 			}
 			if (this.getCarrying() > maxCarrying){
 				fine = fine + carryingFine;
@@ -113,5 +116,13 @@ public abstract class Vehicle implements Payment{
 			}
 		}
 		System.out.println(this.toString() + "cost: "+cost+"; fine: "+fine+"; full: "+(cost+fine));
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	};
 }
